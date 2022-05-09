@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>clock</title>
+        <!-- I will add my font now but you can add any font do you want -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="./index.css">
+    </head>
+    <body>
+        <div class="eg-pro-clock">
+            <div class="top">
+                <span style="--num:1;"><i>1</i></span>
+                <span style="--num:2;"><i>2</i></span>
+                <span style="--num:3;"><i>3</i></span>
+                <span style="--num:4;"><i>4</i></span>
+                <span style="--num:5;"><i>5</i></span>
+                <span style="--num:6;"><i>6</i></span>
+                <span style="--num:7;"><i>7</i></span>
+                <span style="--num:8;"><i>8</i></span>
+                <span style="--num:9;"><i>9</i></span>
+                <span style="--num:10;"><i>10</i></span>
+                <span style="--num:11;"><i>11</i></span>
+                <span style="--num:12;"><i>12</i></span>
+                <div class="sec-line"></div>
+                <div class="min-line"></div>
+                <div class="hour-line"></div>
+            </div>
+            
+            
+            <div class="bottom">
+                <span></span>
+                <span>11 :</span>
+                <span>12 </span>
+                <span>PM</span>
+            </div>
+        </div>
+        
+   
+        <script>
+            
+            setInterval(() => {
+
+                let date = new Date();
+                let seconds = date.getSeconds();
+                let minutes = date.getMinutes();
+                let hours = Math.floor(date.getHours() % 12);
+    
+                let secLine = document.querySelector(".eg-pro-clock .sec-line");
+                let minLine = document.querySelector(".eg-pro-clock .min-line");
+                let hourLine = document.querySelector(".eg-pro-clock .hour-line");
+                let spans = document.querySelectorAll(".eg-pro-clock .bottom span")
+
+                secLine.style.setProperty("--sec",`${seconds}`);
+                minLine.style.setProperty("--min",`${minutes}`);
+                hourLine.style.setProperty("--hour",`${(360 / 12 * hours) + (minutes / 60) }deg`);
+                seconds < 10 ? spans[0].innerHTML = `0${seconds} :` : spans[0].innerHTML = `${seconds} :`;
+                minutes < 10 ? spans[1].innerHTML = `0${minutes} :` : spans[1].innerHTML = `${minutes} :`;
+                hours < 10 ? spans[2].innerHTML = `0${hours}` : spans[2].innerHTML = `${hours}`;
+                date.getHours() > 12 ? spans[3].innerHTML = "PM" : spans[3].innerHTML = "AM";
+            }, 1000);
+        </script>
+    </body>
+</html>
